@@ -1,10 +1,12 @@
-import { fetchAllPokemon, Pokemon } from "@/utils/fetch";
+import { fetchAllPokemon, PokemonType } from "@/utils/fetch";
 import { Box, Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import Pokemon from "./Pokemon";
+import { COLORS } from "@/styles/colors";
 
 interface PokemonContainerProps {
-  searchResults: Pokemon | undefined;
+  searchResults: PokemonType | undefined;
 }
 
 const PokemonContainer = ({ searchResults }: PokemonContainerProps) => {
@@ -14,17 +16,32 @@ const PokemonContainer = ({ searchResults }: PokemonContainerProps) => {
     enabled: searchResults === undefined,
   });
   return (
-    <Box>
+    <Box
+      sx={{ display: "flex", flexWrap: "wrap", margin: "1rem", width: "90vw" }}
+    >
       {searchResults ? (
-        <Button key={searchResults.name}>{searchResults.name}</Button>
+        <Pokemon key={searchResults.name} pokemon={searchResults} />
       ) : (
-        data?.results?.map((pokemon: Pokemon) => {
-          return <Button key={pokemon.name}>{pokemon.name}</Button>;
-        })
-      )}
+        <>
+          {data?.results?.map((pokemon: PokemonType) => {
+            return <Pokemon key={pokemon.name} pokemon={pokemon} />;
+          })}
+          <Button
+            sx={{
+              borderRadius: "3rem",
+              backgroundColor: COLORS.darkBlue,
+              color: COLORS.white,
+              textTransform: "none",
+              padding: "0.75rem",
 
-      {searchResults && (
-        <Button key={searchResults.name}>{searchResults.name}</Button>
+              "&:hover": {
+                opacity: 0.75,
+              },
+            }}
+          >
+            Load the next 30 Pokémon →
+          </Button>
+        </>
       )}
     </Box>
   );

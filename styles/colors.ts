@@ -7,4 +7,5 @@ export const COLORS = {
   lightPurple: "#f8fafc",
   darkestPurple: "#9294a4",
   white: "#fafcfe",
+  darkGrey: "#39393aff",
 };

@@ -1,4 +1,4 @@
-export type Pokemon = {
+export type PokemonType = {
   name: string;
   sprites: { front_default: string };
 };
@@ -7,10 +7,10 @@ export type AllPokemon = {
   count: number;
   next: string;
   previous: null;
-  results: Pokemon[];
+  results: PokemonType[];
 };
 
-export async function fetchPokemon(name: string): Promise<Pokemon> {
+export async function fetchPokemon(name: string): Promise<PokemonType> {
   const res = await fetch(
     `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
   );
