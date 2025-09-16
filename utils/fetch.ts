@@ -18,7 +18,7 @@ export async function fetchPokemon(name: string): Promise<PokemonType> {
   return res.json();
 }
 
-const limit = 30;
+const limit = 150;
 export async function fetchAllPokemon(): Promise<AllPokemon> {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}`);
   if (!res.ok) throw new Error("Pokémon not found");
